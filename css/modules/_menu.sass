@@ -1,0 +1,46 @@
+#menu
+    width: 254px
+
+
+    .module
+        min-height: 100%
+        background-color: #353535
+
+        &__title
+            padding: 20px 0 20px 20px
+            text-transform: uppercase
+            color: white
+            background-color: #167ade
+            // margin: 0 0 10px 0
+            font-weight: bold
+            font-size: 18px
+
+        &__item
+            color: #cfcfcf
+            padding: 15px 40px 15px 20px
+            text-transform: uppercase
+            font-size: 12px
+            cursor: pointer
+            display: flex
+            align-items: center
+
+            span
+                margin: 0 0 0 5px
+                padding: 0 0 5px 0 
+
+    .current_item
+        position: relative
+        background-color: #ffffff24
+        color: white
+
+        &:before 
+            content: ""
+            width: 4px
+            position: absolute
+            left: 0
+            height: 100%
+            background-color: white
+
+        path
+            opacity: 1
+        
