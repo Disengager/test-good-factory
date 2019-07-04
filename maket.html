@@ -27,18 +27,26 @@
 
               <div class="module" id="search">
                 <div class="module__content">
-                  <label for="search"></label>
+                  <label for="search"><svg 
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    width="0.564cm" height="0.564cm">
+                   <path fill-rule="evenodd"  fill="rgb(22, 122, 222)"
+                    d="M15.023,15.988 C14.762,15.988 14.517,15.887 14.334,15.705 L11.582,12.958 L11.447,13.056 C10.213,13.955 8.749,14.429 7.213,14.429 C3.229,14.429 -0.012,11.195 -0.012,7.219 C-0.012,3.243 3.229,0.007 7.213,0.007 C11.197,0.007 14.439,3.243 14.439,7.219 C14.439,8.750 13.962,10.211 13.061,11.445 L12.963,11.579 L15.714,14.325 C15.898,14.511 16.000,14.756 16.000,15.015 C16.000,15.274 15.898,15.519 15.714,15.704 C15.530,15.887 15.285,15.988 15.023,15.988 ZM7.213,1.956 C4.306,1.956 1.941,4.317 1.941,7.219 C1.941,10.121 4.306,12.481 7.213,12.481 C10.120,12.481 12.485,10.121 12.485,7.219 C12.485,4.317 10.120,1.956 7.213,1.956 Z"/>
+                   </svg></label>
                   <input type="text" name="search" id="" placeholder="Поиск">
                   <div class="ext-btn"></div>
                 </div>
               </div>
 
               <div class="module" id="breadcrumb">
-                <span>Главная</span> / <span>Поиск</span>
+                <div class="module__content">
+                    <span>Главная</span> /  <span>Поиск</span>
+                </div>
               </div>
 
               <div class="module" id="content">
-                <div class="module__title"><span><h2>Заголовок</h2><div class="hide-btn"></div></span></div>
+                <div class="module__title"><h2>Заголовок</h2><div class="hide-btn"></div></div>
                 <div class="module__content">
                     <div class="module__row">
                         <div class="custom-select-search">
@@ -56,7 +64,7 @@
                     <div class="checkbox-tree">
                         <div class="checkbox-tree__main">
                             <span class="module__row">
-                                <label>Открытые данные
+                                <label class="current-folder">Открытые данные
                                     <input type="checkbox">
                                     <span></span>
                                 </label>
@@ -85,6 +93,15 @@
                                 </label>
                               </span>
                           </div>
+                          <div class="checkbox-tree__main">
+                              <span class="module__row">
+                                  <label>Данные 2
+                                      <input type="checkbox">
+                                      <span></span>
+                                  </label>
+                                  <div class="hide-btn"></div>
+                               </span>
+                           </div>
                       </div>
                    </div>
                 </div>

@@ -1,2 +1,81 @@
 #page 
     flex: 1
+    min-height: 100%
+    background-color: #eeeeee
+
+    #search
+        width: 100%
+        background-color: white
+        height: 58px
+        display: flex
+        margin: 0
+        align-content: center
+
+        .module
+            &__content
+                padding: 0 55px 0 55px
+                display: flex
+                flex: 1
+                align-items: center
+
+                input[type=text]
+                    border: none
+                    padding: 15px 5px 15px 5px
+                    flex: 1
+                    margin: 0 0 5px 0 
+
+    #breadcrumb
+        .module
+            &__content
+                padding: 30px 0 15px 0
+                font-size: 14px
+                color: #5a5a5a
+                
+                span
+                    padding: 0 5px 0 5px
+
+                    &:nth-child(1)
+                        padding: 0 5px 0 0
+
+
+    #content
+        .module
+            &__title
+                background-color: #f5f5f5
+                text-transform: uppercase
+                display: flex
+                align-items: center
+                border-radius: 5px
+
+                h2
+                    padding: 0 0 0 10px
+
+                &:before
+                    @include title
+                    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='0.564cm' height='0.564cm'%3E%3Cpath fill-rule='evenodd' fill='rgb(255, 255, 255)' d='M15.023,15.988 C14.762,15.988 14.517,15.887 14.334,15.705 L11.582,12.958 L11.447,13.056 C10.213,13.955 8.749,14.429 7.213,14.429 C3.229,14.429 -0.012,11.195 -0.012,7.219 C-0.012,3.243 3.229,0.007 7.213,0.007 C11.197,0.007 14.439,3.243 14.439,7.219 C14.439,8.750 13.962,10.211 13.061,11.445 L12.963,11.579 L15.714,14.325 C15.898,14.511 16.000,14.756 16.000,15.015 C16.000,15.274 15.898,15.519 15.714,15.704 C15.530,15.887 15.285,15.988 15.023,15.988 ZM7.213,1.956 C4.306,1.956 1.941,4.317 1.941,7.219 C1.941,10.121 4.306,12.481 7.213,12.481 C10.120,12.481 12.485,10.121 12.485,7.219 C12.485,4.317 10.120,1.956 7.213,1.956 Z'/%3E%3C/svg%3E")
+                    background-repeat: no-repeat
+                    background-position: center
+
+            &__content
+                background-color: white
+                border-radius: 0 0 5px 5px
+                padding: 0 23px 0 23px
+                font-size: 12px
+                color: #868686
+
+                div
+                    border: none
+
+                a
+                    color: #549de7
+                    text-decoration: none
+
+
+            &__row
+                display: flex
+                align-items: center
+                padding: 10px 0 10px 0
+                border-top: 1px solid #ebf0f2
+
+    .module 
+        margin: 0 55px 0 55px
