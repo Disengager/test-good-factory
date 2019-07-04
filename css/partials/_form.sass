@@ -72,23 +72,27 @@
 
 .custom-select
     &__search
-        padding: 10px 30px 10px 10px
+        padding: 0 30px 0 10px
         text-align: left
         border-radius: 3px
-        font-size: 14px
+        font-size: 12px
         position: relative
-        color: #167ade
+        color: #549de7
         max-width: 100%
         overflow: hidden
         border: 1px solid #ebf0f2
+        display: flex
+        align-items: center
+        background-color: #f9fbfd
         
         &:before 
             position: absolute
             content: ""
-            top: 9px
+            top: 5px
             right: 20px
             width: 20px
             height: 20px
+            background-size: 90%
             background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='0.529cm' height='0.529cm'%3E%3Cpath fill-rule='evenodd' fill='rgb(22, 122, 222)' d='M13.764,14.730 C13.529,14.730 13.308,14.639 13.143,14.474 L10.753,12.084 L10.651,12.157 C9.567,12.948 8.281,13.365 6.935,13.365 C3.438,13.365 0.594,10.520 0.594,7.024 C0.594,3.526 3.438,0.681 6.935,0.681 C10.432,0.681 13.277,3.526 13.277,7.024 C13.277,8.370 12.859,9.655 12.069,10.741 L11.995,10.841 L14.385,13.232 C14.551,13.398 14.642,13.618 14.642,13.853 C14.642,14.087 14.551,14.307 14.385,14.474 C14.220,14.639 13.999,14.730 13.764,14.730 ZM6.935,2.438 C4.407,2.438 2.350,4.495 2.350,7.024 C2.350,9.552 4.407,11.609 6.935,11.609 C9.463,11.609 11.520,9.552 11.520,7.024 C11.520,4.495 9.463,2.438 6.935,2.438 Z'/%3E%3C/svg%3E")
             background-repeat: no-repeat
 
@@ -99,15 +103,14 @@
             display: none 
 
     &__function
-        width: 250px
-        padding: 10px 0 10px 0
+        width: 193px
         text-align: center
         text-transform: uppercase
-        border: 1px solid #167ade
+        border: 2px solid #167ade
         border-radius: 3px
-        color: #167ade
+        color: #549de7
         font-weight: bold
-        font-size: 13px
+        font-size: 10px
         cursor: pointer
         position: relative
         user-select: none
@@ -117,6 +120,9 @@
 
         select
             display: none
+
+        span
+            flex: 1
             
             
 
