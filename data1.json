@@ -1,8 +1,8 @@
 {
     "Data": [
         {
-            "Name":"Открытые данные",
-            "Id": "checkboxgroup1",
+            "Name":"Данные открытые ",
+            "Id": "1checkboxgroup1",
             "Show": true,
             "Sections": [
                 {
@@ -36,8 +36,8 @@
             ]
         },
         {
-            "Name":"Данные 2",
-            "Id": "checkboxgroup2",
+            "Name":"2 Данные",
+            "Id": "1checkboxgroup2",
             "Show": false,
             "Sections": [
                 {
@@ -71,8 +71,8 @@
             ]
         },
         {
-            "Name":"Данные 3",
-            "Id": "checkboxgroup3",
+            "Name":"3 Данные",
+            "Id": "1checkboxgroup3",
             "Show": false,
             "Sections": [
                 {
