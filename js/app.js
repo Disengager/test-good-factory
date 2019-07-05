@@ -5,6 +5,7 @@ var main = {
   currentUrl: "data3.json",
   currentMenu: 3,
   pageShow: true,
+  phoneMenu: false,
   data: {},
 }; 
 
@@ -98,15 +99,22 @@ var Content = React.createClass({
       var blocks = [];
       main.data.map(function(item) {
         main[item['Id']] = main[item['Id']] == undefined? false : main[item['Id']];
-        var subblocks = [];
+        var subblocks = [], checkbox = '';
+
         if(item['Sections'].length > 0) {
           item['Sections'].map(function(section, id) {
+            
+            if(content.props.getCheck(item['Id'] + "_" + id))
+              checkbox = React.createElement('input', {type:'checkbox', checked:"checked", onClick: function onClick() { content.props.setCheck(item['Id'] + "_" + id) }});
+            else 
+              checkbox = React.createElement('input', {type:'checkbox', onClick: function onClick() { content.props.setCheck(item['Id'] + "_" + id) }});
+
             subblocks.push(
               React.createElement('span', {className: 'module__row'},
                 React.createElement('label', {},
                   React.createElement('a', {href: '#'}, 'Раздел ' + (parseInt(id)+1) + '. '),
                   section['Name'],
-                  React.createElement('input', {type:'checkbox'}),
+                  checkbox,
                   React.createElement('span')
                 )
               )
@@ -124,7 +132,7 @@ var Content = React.createClass({
             React.createElement('span', {className: 'module__row'},
               React.createElement('label', {className: ''}, 
                 item['Name'],
-                React.createElement('input', {type: 'checkbox'}),
+                React.createElement('input', {type: 'checkbox', onClick: function onClick() { content.props.setFolderCheck(item['Id'], item['Sections'].length ) }}),
                 React.createElement('span')
               ),
               block_button
@@ -140,8 +148,6 @@ var Content = React.createClass({
           blocks
         );
       });
-
-      console.log(items);
     } 
 
     return React.createElement(
@@ -180,7 +186,7 @@ var Page = React.createClass({
       { className: 'block', id: 'page' },
         React.createElement(Search, {}),
         React.createElement(BreadCrumb, {}),
-        React.createElement(Content, {show: this.props.show})
+        React.createElement(Content, {show: this.props.show, getCheck: this.props.getCheck, setCheck: this.props.setCheck, setFolderCheck: this.props.setFolderCheck})
     );
   }
 });
@@ -189,7 +195,9 @@ var ModuleMenu = React.createClass({
   displayName: 'ModuleMenu',
 
   render: function render() {
-    var menuClick = this.props.menuClick;
+    var menuClick = this.props.menuClick,
+        phoneMenu = this.props.phoneMenu;
+
     if(this.props.menu.length > 0)
       var items = this.props.menu.map(function (item, id) {
         return React.createElement('div', {onClick: function onClick() { return menuClick(id); }, key: id, className: 'module__item' + (id == main.currentMenu? '  current_item': '')},
@@ -201,8 +209,11 @@ var ModuleMenu = React.createClass({
       });
     else 
       var items = null;
-    return React.createElement('div', { className: 'module' },
-      React.createElement('div', {className: 'module__title'}, 'Лого'),
+    return React.createElement('div', { className: 'module'},
+      React.createElement('div', {className: 'module__title'}, 
+        React.createElement('span', {}, 'Лого'),
+        React.createElement('div', {id: 'gumburger', onClick: function onClick() { return phoneMenu(); }})
+      ),
       React.createElement('div', {className: 'module__content'},
         items
       ),
@@ -216,8 +227,8 @@ var Nav = React.createClass({
   render: function render() {
     return React.createElement(
       'div',
-      { className: 'block', id: 'menu' },
-      React.createElement(ModuleMenu, {menu: this.props.menu, menuClick: this.props.menuClick}),
+      { className: 'block' + (main.phoneMenu?' open-menu': '') , id: 'menu' },
+      React.createElement(ModuleMenu, {menu: this.props.menu, menuClick: this.props.menuClick, phoneMenu: this.props.phoneMenu}),
     );
   }
 });
@@ -232,9 +243,29 @@ var Wrapper = React.createClass({
     {svg:{xmlns:"http://www.w3.org/2000/svg", xmlnsXlink:"http://www.w3.org/1999/xlink", width:"0.635cm", height:"0.67cm"}, path: {fillRule:"evenodd",  opacity:"0.322", fill:"rgb(255, 255, 255)", d:"M14.998,18.962 L3.417,18.962 C1.935,18.962 0.729,17.795 0.729,16.359 L0.729,13.956 C0.729,13.404 1.193,12.955 1.763,12.955 C2.333,12.955 2.796,13.404 2.796,13.956 L2.796,16.359 C2.796,16.691 3.075,16.961 3.417,16.961 L14.998,16.961 C15.341,16.961 15.620,16.691 15.620,16.359 L15.620,13.956 C15.620,13.404 16.083,12.955 16.653,12.955 C17.223,12.955 17.686,13.404 17.686,13.956 L17.686,16.359 C17.686,17.795 16.481,18.962 14.998,18.962 ZM9.939,13.862 C9.937,13.864 9.935,13.864 9.934,13.866 C9.840,13.955 9.730,14.028 9.607,14.078 C9.482,14.129 9.347,14.156 9.208,14.156 C9.068,14.156 8.934,14.129 8.809,14.078 C8.684,14.027 8.571,13.954 8.477,13.862 C8.477,13.862 8.477,13.862 8.477,13.862 L5.168,10.658 C4.973,10.470 4.865,10.219 4.865,9.951 C4.865,9.684 4.973,9.432 5.168,9.244 C5.363,9.055 5.622,8.950 5.899,8.950 C6.175,8.950 6.435,9.055 6.630,9.244 L8.174,10.740 L8.174,1.941 C8.174,1.390 8.638,0.940 9.208,0.940 C9.778,0.940 10.241,1.390 10.241,1.941 L10.241,10.740 L11.786,9.244 C11.981,9.055 12.240,8.950 12.517,8.950 C12.793,8.950 13.052,9.055 13.247,9.244 C13.443,9.432 13.550,9.684 13.550,9.951 C13.550,10.219 13.443,10.470 13.247,10.658 L9.939,13.862 Z"},text: 'Пункт меню в две строки'},
     {svg:{xmlns:"http://www.w3.org/2000/svg", xmlnsXlink:"http://www.w3.org/1999/xlink", width:"0.564cm", height:"0.564cm"}, path: {fillRule:"evenodd",  opacity:"0.322", fill:"rgb(255, 255, 255)", d:"M0.912,16.000 C0.792,16.000 0.674,15.977 0.563,15.931 C0.221,15.789 -0.000,15.458 -0.000,15.088 L-0.000,2.487 C-0.000,1.115 1.115,-0.000 2.487,-0.000 L13.513,-0.000 C14.885,-0.000 16.000,1.115 16.000,2.487 L16.000,10.362 C16.000,11.734 14.885,12.850 13.513,12.850 L4.440,12.850 L1.557,15.733 C1.384,15.905 1.155,16.000 0.912,16.000 ZM2.487,1.823 C2.121,1.823 1.824,2.121 1.824,2.487 L1.824,12.886 L3.417,11.293 C3.587,11.123 3.822,11.026 4.062,11.026 L13.513,11.026 C13.879,11.026 14.176,10.728 14.176,10.362 L14.176,2.487 C14.176,2.121 13.879,1.823 13.513,1.823 L2.487,1.823 Z"}, text: 'Пункт меню'}
   ],
-
-  hide: function hide(val) {
-
+  setFolderCheck: function setFolderCheck(select, length) {
+    select = 'check_' + select;
+    var temp = {};
+    temp[select] = main[select] == true? false : true;
+    main[select] = temp[select];
+    this.setState(temp);
+    for(var i = 0; i < length; i++) {
+      var temp = {}, tempSelect = select + '_' + i;
+      temp[tempSelect] = main[select];
+      main[tempSelect] = temp[tempSelect];
+      this.setState(temp);
+    }
+  },
+  setCheck: function check(select) {
+    select = 'check_' + select;
+    var temp = {};
+    temp[select] = main[select] == true? false : true;
+    main[select] = temp[select];
+    this.setState(temp);
+  },
+  getCheck: function getCheck(select) {
+    select = 'check_' + select;
+    return main[select];
   },
   show : function show(select) {
     var temp = {};
@@ -254,14 +285,17 @@ var Wrapper = React.createClass({
         main.data = data['Data'];
         mainObj.setState({data: main.data});
     });
-    
+  },
+  phoneMenu: function phoneMenu() {
+    main.phoneMenu = !main.phoneMenu;
+    this.setState({phoneMenu: main.phoneMenu});
   },
   render: function render() {
     return React.createElement(
       'div',
-      { className: 'main'},
-      React.createElement(Nav, {menu: this.menu, menuClick: this.menuClick}),
-      React.createElement(Page,{show: this.show}),
+      { className: 'main' + (main.phoneMenu?' open-menu-body': '')  },
+      React.createElement(Nav, {menu: this.menu, menuClick: this.menuClick, phoneMenu: this.phoneMenu}),
+      React.createElement(Page,{show: this.show, setCheck: this.setCheck, getCheck: this.getCheck, setFolderCheck: this.setFolderCheck}),
     );
   }
 });
